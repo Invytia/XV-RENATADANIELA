@@ -10,9 +10,12 @@
     <style>
         :root {
             --blanco: #ffffff;
-            --rosa-pastel: #fce4ec;
-            --rosa-medio: #f8bbd0;
+            --blanco-transparente: rgba(255, 255, 255, 0.75);
+            --rosa-muy-claro: #fff0f5;
+            --rosa-pastel: #ffe4e1;
+            --rosa-medio: #ffb6c1;
             --rosa-oscuro: #f06292;
+            --rosa-texto: #d8437d; /* Un rosa más intenso para resaltar textos */
             --dorado: #d4af37;
             --dorado-oscuro: #b5952f;
             --texto-oscuro: #4a3b3e;
@@ -27,7 +30,7 @@
         body {
             font-family: var(--fuente-texto);
             color: var(--texto-oscuro);
-            background: linear-gradient(-45deg, #fff0f5, var(--rosa-pastel), #fdfbfb, #ffffff);
+            background: linear-gradient(-45deg, var(--rosa-muy-claro), var(--rosa-pastel), #ffdde1, #ffffff);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             overflow-x: hidden;
@@ -42,28 +45,29 @@
         #particles-js { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: var(--blanco-transparente);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(240, 98, 146, 0.15); /* Sombra rosada */
         }
 
-        /* --- SECCIÓN HERO --- */
+        /* --- SECCIÓN HERO AJUSTADA --- */
         .hero-container {
             height: 100vh;
             width: 100%;
-            background: linear-gradient(rgba(252, 228, 236, 0.5), rgba(252, 228, 236, 0.2)), url('assets/hero.jpg');
+            background: url('assets/hero.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
-            align-items: center;
+            align-items: flex-end; /* Mueve el contenido hacia abajo */
             justify-content: center;
             text-align: center;
+            padding-bottom: 8vh; /* Separación desde el fondo para que no estorbe */
         }
 
-        /* --- SOBRE (ENVELOPE) --- */
+        /* --- SOBRE (BLANCO) --- */
         #envelope-screen { 
             position: fixed; 
             top: 0; 
@@ -82,32 +86,36 @@
         
         .envelope-wrapper { position: relative; width: 320px; height: 220px; cursor: pointer; animation: float 3s ease-in-out infinite; perspective: 1000px; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
-        .envelope-body { position: absolute; bottom: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--rosa-medio), var(--rosa-oscuro)); border-radius: 10px; z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, #f8bbd0, #f48fb1); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 0.6s ease-in-out; z-index: 4; }
-        .envelope-letter { position: absolute; bottom: 10px; left: 10px; width: 300px; height: 200px; background: var(--blanco); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; transition: transform 1s ease-in-out 0.6s; border: 1px solid var(--dorado); padding: 20px;}
-        .envelope-letter h2 { font-family: var(--fuente-nombres); font-size: 2.5rem; color: var(--dorado-oscuro); text-align: center; line-height: 1; margin: 0;}
         
-        /* Modificación para el sello con imagen */
+        /* Modificación a sobre blanco para alto contraste */
+        .envelope-body { position: absolute; bottom: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #ffffff, #f2f2f2); border-radius: 10px; z-index: 2; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid #eaeaea; }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, #ffffff, #f9f9f9); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 0.6s ease-in-out; z-index: 4; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.05)); }
+        
+        .envelope-letter { position: absolute; bottom: 10px; left: 10px; width: 300px; height: 200px; background: var(--rosa-muy-claro); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; transition: transform 1s ease-in-out 0.6s; border: 1px solid var(--rosa-medio); padding: 20px;}
+        .envelope-letter h2 { font-family: var(--fuente-nombres); font-size: 2.5rem; color: var(--rosa-texto); text-align: center; line-height: 1; margin: 0;}
+        
+        /* Modificación para el sello 100% transparente sin cortes */
         .wax-seal { 
             position: absolute; 
-            top: 100px; 
+            top: 85px; 
             left: 50%; 
             transform: translateX(-50%); 
-            width: 55px; 
-            height: 55px; 
-            background: radial-gradient(circle, #f0ca6c 0%, var(--dorado) 100%); 
-            border-radius: 50%; 
+            width: 75px; /* Ajusta este tamaño si el PNG es muy grande o pequeño */
+            height: 75px; 
+            background: transparent; /* Sin fondo */
+            border-radius: 0; /* Sin cortes circulares forzados */
             z-index: 5; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
-            overflow: hidden;
+            box-shadow: none; /* Sin sombras artificiales */
+            overflow: visible;
         }
         .wax-seal img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Evita recortes de la imagen */
+            background: transparent;
         }
         
         .open-envelope .wax-seal { opacity: 0; transition: opacity 0.3s; }
@@ -117,56 +125,76 @@
         /* --- CONTENIDO PRINCIPAL --- */
         #main-content { display: none; opacity: 0; transition: opacity 2s ease-in; position: relative; z-index: 10; }
         section { padding: 80px 20px; text-align: center; max-width: 1000px; margin: 0 auto; overflow: hidden; }
-        h1 { font-family: var(--fuente-nombres); font-size: 4.8rem; color: var(--texto-oscuro); text-shadow: 2px 2px 4px rgba(255,255,255,0.7); line-height: 1.1; }
-        h2 { font-family: var(--fuente-titulos); font-size: 2.5rem; margin-bottom: 30px; font-style: italic; color: var(--dorado-oscuro); }
+        h1 { font-family: var(--fuente-nombres); font-size: 4.8rem; color: var(--texto-oscuro); text-shadow: 2px 2px 4px rgba(255,255,255,0.8); line-height: 1.1; }
+        h2 { font-family: var(--fuente-titulos); font-size: 2.8rem; margin-bottom: 30px; font-style: italic; color: var(--rosa-texto); }
         
-        /* --- ANIMACIONES DE ENTRADA (REVEAL) --- */
-        .reveal { opacity: 0; transition: all 1.2s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal.fade-up { transform: translateY(50px); }
-        .reveal.zoom-in { transform: scale(0.9); }
-        .reveal.slide-left { transform: translateX(50px); }
-        .reveal.slide-right { transform: translateX(-50px); }
-        .reveal.active { opacity: 1; transform: translate(0) scale(1); }
+        /* --- ANIMACIONES DE ENTRADA MULTIPLES (REVEAL) --- */
+        .reveal { opacity: 0; transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.fade-up { transform: translateY(40px); }
+        .reveal.zoom-in { transform: scale(0.85); }
+        .reveal.slide-left { transform: translateX(60px); }
+        .reveal.slide-right { transform: translateX(-60px); }
+        .reveal.flip-up { transform: perspective(400px) rotateX(90deg); }
+        
+        /* Tiempos de retraso para animaciones escalonadas */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.5s; }
+        
+        .reveal.active { opacity: 1; transform: translate(0) scale(1) rotateX(0); }
+
+        /* --- CUENTA REGRESIVA LINEAL --- */
+        .timer-container { 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center;
+            max-width: 500px; 
+            margin: 20px auto; 
+            flex-wrap: nowrap; /* Fuerza un solo renglón */
+        }
+        .time-box { 
+            padding: 5px; 
+            min-width: 0; 
+            flex: 1; 
+            text-align: center; 
+            background: transparent; 
+            border: none; 
+        }
+        .time-box span { 
+            display: block; 
+            font-family: var(--fuente-titulos); 
+            font-size: 2.8rem; 
+            color: var(--dorado-oscuro); 
+            line-height: 1; 
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+        .time-box p { 
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            color: var(--rosa-texto);
+        }
+        .timer-sep { font-size: 2rem; color: var(--rosa-medio); font-family: var(--fuente-titulos); padding-bottom: 20px;}
 
         /* --- CARRETEL (GALERÍA DESLIZABLE HORIZONTAL) --- */
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-            padding: 20px 0;
-        }
+        .carousel-wrapper { position: relative; width: 100%; padding: 20px 0; }
         .carousel-container {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 10px 20px;
-            -ms-overflow-style: none; /* IE y Edge */
-            scrollbar-width: none; /* Firefox */
+            display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory;
+            scroll-behavior: smooth; padding: 10px 20px; -ms-overflow-style: none; scrollbar-width: none;
         }
-        .carousel-container::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera */ }
+        .carousel-container::-webkit-scrollbar { display: none; }
         .carousel-item {
-            flex: 0 0 auto;
-            width: 260px;
-            height: 380px;
-            scroll-snap-align: center;
-            object-fit: cover;
-            border-radius: 15px;
-            cursor: pointer;
-            border: 4px solid var(--blanco);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+            flex: 0 0 auto; width: 260px; height: 380px; scroll-snap-align: center;
+            object-fit: cover; border-radius: 15px; cursor: pointer;
+            border: 4px solid var(--blanco); box-shadow: 0 8px 20px rgba(240, 98, 146, 0.25);
             transition: transform 0.3s;
         }
         .carousel-item:active { transform: scale(0.95); }
         .swipe-indicator {
-            font-size: 0.9rem;
-            color: var(--texto-claro);
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            animation: pulse 2s infinite;
+            font-size: 0.9rem; color: var(--texto-claro); margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 10px; animation: pulse 2s infinite;
         }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
@@ -176,26 +204,15 @@
             background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 10000;
             backdrop-filter: blur(5px);
         }
-        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 30px rgba(255,255,255,0.1); }
+        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 30px rgba(240, 98, 146, 0.3); }
         #lightbox .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; transition: 0.3s; }
         #lightbox .close-btn:hover { color: var(--rosa-oscuro); }
 
-        /* --- UBICACIONES (SIN CAJAS) --- */
-        .ubicacion-limpia {
-            margin: 40px 0;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        }
+        /* --- UBICACIONES --- */
+        .ubicacion-limpia { margin: 40px 0; padding: 20px 0; border-bottom: 1px solid rgba(240, 98, 146, 0.3); }
         .ubicacion-limpia:last-child { border-bottom: none; }
-        .ubicacion-limpia i { font-size: 2.5rem; color: var(--dorado); margin: 0 10px 15px 10px; }
-        .map-iframe {
-            width: 100%;
-            max-width: 600px;
-            height: 350px;
-            border-radius: 15px;
-            margin: 20px auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        .ubicacion-limpia i { font-size: 2.5rem; color: var(--rosa-texto); margin: 0 10px 15px 10px; }
+        .map-iframe { width: 100%; max-width: 600px; height: 350px; border-radius: 15px; margin: 20px auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* --- FORMULARIOS --- */
         input, select, textarea {
@@ -203,11 +220,11 @@
             border: 1px solid var(--rosa-medio); background: rgba(255,255,255,0.9);
             font-family: var(--fuente-texto); color: var(--texto-oscuro); outline: none; transition: 0.3s;
         }
-        input:focus, select:focus, textarea:focus { border-color: var(--dorado); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+        input:focus, select:focus, textarea:focus { border-color: var(--rosa-oscuro); box-shadow: 0 0 8px rgba(240, 98, 146, 0.3); }
 
         .btn {
             display: inline-block; padding: 16px 35px;
-            background: linear-gradient(135deg, var(--rosa-medio), var(--rosa-oscuro));
+            background: linear-gradient(135deg, var(--rosa-oscuro), var(--rosa-texto));
             color: white; text-decoration: none; border-radius: 50px; font-weight: 600;
             border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(240, 98, 146, 0.4);
             font-size: 1rem;
@@ -216,57 +233,47 @@
         .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
         .btn-whatsapp:hover { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
 
-        .timer-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
-        .time-box { padding: 15px; min-width: 90px; border: 1px solid rgba(212, 175, 55, 0.3); text-align: center; border-radius: 15px; background: rgba(255,255,255,0.7); }
-        .time-box span { display: block; font-family: var(--fuente-titulos); font-size: 2.5rem; color: var(--dorado-oscuro); line-height: 1; margin-bottom: 5px;}
-        .time-box p { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
-
         .btn-small {
             display: inline-block; padding: 12px 25px; margin: 5px;
-            background: rgba(255, 255, 255, 0.8); color: var(--texto-oscuro);
-            border: 1px solid var(--dorado); border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: 0.3s;
+            background: rgba(255, 255, 255, 0.9); color: var(--rosa-texto);
+            border: 1px solid var(--rosa-medio); border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: 0.3s;
         }
-        .btn-small:hover { background: var(--dorado); color: white; }
+        .btn-small:hover { background: var(--rosa-texto); color: white; border-color: var(--rosa-texto); }
 
         /* --- BOTÓN DE MÚSICA STICKY --- */
         .music-btn {
             position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); border: 2px solid var(--dorado);
-            color: var(--dorado); font-size: 1.2rem; cursor: pointer; z-index: 10001;
-            display: none; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); border: 2px solid var(--rosa-texto);
+            color: var(--rosa-texto); font-size: 1.2rem; cursor: pointer; z-index: 10001;
+            display: none; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3); transition: all 0.3s ease;
         }
         .music-btn:hover { transform: scale(1.1); background: var(--rosa-pastel); }
 
         /* --- ITINERARIO --- */
         .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
-        .timeline::before { content: ''; position: absolute; left: 50%; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, var(--dorado), transparent); }
+        .timeline::before { content: ''; position: absolute; left: 50%; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, var(--rosa-medio), transparent); }
         .timeline-item { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; width: 100%; }
         .timeline-item:nth-child(even) { flex-direction: row-reverse; }
         .timeline-content { width: 45%; padding: 20px; text-align: center; }
         .timeline-content h4 { font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--dorado-oscuro); margin-bottom: 5px; }
-        .timeline-content p { font-weight: 600; font-size: 1.1rem; }
-        .timeline-icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: white; border: 2px solid var(--dorado); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; color: var(--rosa-oscuro); font-size: 1.2rem; box-shadow: 0 0 10px rgba(212,175,55,0.3); }
+        .timeline-content p { font-weight: 600; font-size: 1.1rem; color: var(--rosa-texto); }
+        .timeline-icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: white; border: 2px solid var(--rosa-medio); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; color: var(--dorado-oscuro); font-size: 1.2rem; box-shadow: 0 0 10px rgba(240, 98, 146, 0.3); }
 
         @media (max-width: 768px) {
-            h1 { font-size: 3.5rem; }
+            h1 { font-size: 4rem; }
             .timeline::before { left: 30px; }
             .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; align-items: flex-end; }
             .timeline-content { width: 80%; margin-left: auto; text-align: left; }
             .timeline-icon { left: 30px; top: 30px; transform: translate(-50%, 0); }
             
-            /* Sombra al texto del sobre para que resalte sobre el fondo en móviles si es necesario */
-            #envelope-screen div:last-child {
-                background: rgba(255, 255, 255, 0.7);
-                padding: 5px 15px;
-                border-radius: 20px;
-                backdrop-filter: blur(5px);
-            }
+            .timer-container { gap: 0; }
+            .time-box span { font-size: 2.2rem; }
+            .timer-sep { padding-bottom: 10px; font-size: 1.5rem;}
         }
     </style>
 </head>
 <body>
 
-    <!-- AUDIO Y BOTÓN DE CONTROL -->
     <audio id="bgMusic" loop>
         <source src="assets/song.mp3" type="audio/mpeg">
     </audio>
@@ -284,108 +291,111 @@
             <div class="envelope-flap"></div>
             <div class="envelope-body"></div>
             
-            <!-- Sello con la imagen ajustada -->
+            <!-- Sello con la imagen ajustada SIN FONDO -->
             <div class="wax-seal">
-                <img src="assets/sello.png" alt="Sello de la invitación">
+                <img src="assets/sello.png" alt="Sello">
             </div>
         </div>
-        <div style="margin-top: 50px; letter-spacing: 4px; text-transform: uppercase; font-size: 0.85rem; color: var(--texto-oscuro); font-weight: 500; animation: pulse 2s infinite; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 20px; backdrop-filter: blur(5px);">Toca para abrir</div>
+        <div style="margin-top: 50px; letter-spacing: 4px; text-transform: uppercase; font-size: 0.85rem; color: var(--texto-oscuro); font-weight: 500; animation: pulse 2s infinite; background: rgba(255,255,255,0.85); padding: 8px 20px; border-radius: 20px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Toca para abrir</div>
     </div>
 
-    <!-- PARTÍCULAS DE FONDO -->
+    <!-- PARTÍCULAS -->
     <div id="particles-js"></div>
 
     <div id="main-content">
         
         <!-- HERO -->
-        <section class="hero-container reveal fade-up" style="padding:0;">
-            <div class="glass-card" style="padding: 40px 20px; width: 90%; max-width: 650px;">
-                <div style="letter-spacing: 6px; color: var(--dorado-oscuro); margin-bottom: 15px; font-weight: 600; font-size: 0.9rem;">MIS XV AÑOS</div>
+        <section class="hero-container reveal fade-up" style="padding:0; padding-bottom: 8vh;">
+            <div class="glass-card reveal flip-up delay-1" style="padding: 30px 20px; width: 90%; max-width: 650px;">
+                <div style="letter-spacing: 6px; color: var(--dorado-oscuro); margin-bottom: 10px; font-weight: 600; font-size: 0.85rem;">MIS XV AÑOS</div>
                 <h1>Renata Daniela</h1>
-                <p style="font-weight: 600; margin-top: 20px; letter-spacing: 3px; font-size: 1.1rem; color: var(--texto-oscuro);">17 DE OCTUBRE DE 2026</p>
+                <p style="font-weight: 600; margin-top: 15px; letter-spacing: 3px; font-size: 1.1rem; color: var(--texto-oscuro);">17 DE OCTUBRE DE 2026</p>
             </div>
         </section>
 
         <!-- CUENTA REGRESIVA Y MENSAJE -->
-        <section class="reveal zoom-in">
-            <h2>Faltan</h2>
-            <div class="timer-container">
+        <section>
+            <h2 class="reveal slide-left">Faltan</h2>
+            <div class="timer-container reveal zoom-in delay-1">
                 <div class="time-box"><span id="days">00</span><p>Días</p></div>
+                <div class="timer-sep">:</div>
                 <div class="time-box"><span id="hours">00</span><p>Hrs</p></div>
+                <div class="timer-sep">:</div>
                 <div class="time-box"><span id="minutes">00</span><p>Min</p></div>
+                <div class="timer-sep">:</div>
                 <div class="time-box"><span id="seconds">00</span><p>Seg</p></div>
             </div>
-            <p style="margin-top: 40px; font-style: italic; font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--texto-claro); line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p class="reveal fade-up delay-2" style="margin-top: 40px; font-style: italic; font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-claro); line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
                 "Gracias Dios por permitirme llegar a este día tan especial en mi vida con personas como mis familiares y amigos."
             </p>
         </section>
 
         <!-- PADRES Y PADRINOS -->
-        <section class="reveal slide-left">
-            <h2>Con la bendición de</h2>
-            <div class="glass-card" style="padding: 35px; margin-bottom: 25px;">
-                <p style="color: var(--dorado-oscuro); letter-spacing: 3px; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">MIS PADRES</p>
-                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem;">Miguel Emilio Vázquez Vázquez<br><span style="font-size: 1.2rem; color: var(--texto-claro);">&</span><br>Martha Roberta Hernández Vázquez</p>
+        <section>
+            <h2 class="reveal slide-right">Con la bendición de</h2>
+            <div class="glass-card reveal fade-up delay-1" style="padding: 35px; margin-bottom: 25px;">
+                <p style="color: var(--rosa-texto); letter-spacing: 3px; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;">MIS PADRES</p>
+                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-oscuro);">Miguel Emilio Vázquez Vázquez<br><span style="font-size: 1.2rem; color: var(--dorado-oscuro);">&</span><br>Martha Roberta Hernández Vázquez</p>
             </div>
-            <div class="glass-card" style="padding: 35px;">
-                <p style="color: var(--dorado-oscuro); letter-spacing: 3px; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">MIS PADRINOS</p>
-                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem;">Nilton Gerardo Hernández Vázquez<br><span style="font-size: 1.2rem; color: var(--texto-claro);">&</span><br>Carmen Palma Jaimes</p>
+            <div class="glass-card reveal fade-up delay-2" style="padding: 35px;">
+                <p style="color: var(--rosa-texto); letter-spacing: 3px; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;">MIS PADRINOS</p>
+                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-oscuro);">Nilton Gerardo Hernández Vázquez<br><span style="font-size: 1.2rem; color: var(--dorado-oscuro);">&</span><br>Carmen Palma Jaimes</p>
             </div>
         </section>
 
         <!-- UBICACIONES -->
-        <section class="reveal fade-up">
-            <h2>Dónde Celebraremos</h2>
+        <section>
+            <h2 class="reveal zoom-in">Dónde Celebraremos</h2>
             
-            <div class="ubicacion-limpia">
+            <div class="ubicacion-limpia reveal slide-up delay-1">
                 <i class="fa-solid fa-church"></i>
                 <i class="fa-solid fa-champagne-glasses" style="margin-left: -5px;"></i>
-                <h3 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--texto-oscuro); margin-bottom: 15px;">Ceremonia y Recepción</h3>
-                <p style="font-weight: 600; color: var(--dorado-oscuro); font-size: 1.3rem;">Ex hacienda del Carmen</p>
+                <h3 style="font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--dorado-oscuro); margin-bottom: 15px;">Ceremonia y Recepción</h3>
+                <p style="font-weight: 600; color: var(--rosa-texto); font-size: 1.3rem;">Ex hacienda del Carmen</p>
                 
-                <div class="map-iframe">
+                <div class="map-iframe reveal fade-up delay-2">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7531.581252951008!2d-99.5939441!3d19.2914692!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd8a60b001691f%3A0x3da157d4779a7cac!2sEx%20Hacienda%20Del%20Carmen!5e0!3m2!1ses!2smx!4v1786739864274!5m2!1ses!2smx" width="100%" height="100%" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 </div>
 
-                <div style="margin-top: 25px;">
+                <div style="margin-top: 25px;" class="reveal zoom-in delay-3">
                     <a href="https://maps.app.goo.gl/DCLUGD9zi6QW2hca7" target="_blank" class="btn-small"><i class="fa-solid fa-map-location-dot"></i> Abrir en Maps</a>
                 </div>
             </div>
         </section>
 
         <!-- ITINERARIO -->
-        <section class="reveal zoom-in">
-            <h2>Itinerario</h2>
+        <section>
+            <h2 class="reveal slide-left">Itinerario</h2>
             <div class="timeline">
-                <div class="timeline-item reveal slide-right">
+                <div class="timeline-item reveal slide-right delay-1">
                     <div class="timeline-icon"><i class="fa-solid fa-church"></i></div>
                     <div class="timeline-content glass-card">
                         <h4>Misa</h4>
                         <p>4:00 P.M.</p>
                     </div>
                 </div>
-                <div class="timeline-item reveal slide-left">
+                <div class="timeline-item reveal slide-left delay-1">
                     <div class="timeline-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
                     <div class="timeline-content glass-card">
                         <h4>Recepción</h4>
                         <p>5:00 P.M.</p>
                     </div>
                 </div>
-                <div class="timeline-item reveal slide-right">
+                <div class="timeline-item reveal slide-right delay-2">
                     <div class="timeline-icon"><i class="fa-solid fa-utensils"></i></div>
                     <div class="timeline-content glass-card">
                         <h4>Comida</h4>
                         <p>5:30 P.M.</p>
                     </div>
                 </div>
-                <div class="timeline-item reveal slide-left">
+                <div class="timeline-item reveal slide-left delay-2">
                     <div class="timeline-icon"><i class="fa-solid fa-music"></i></div>
                     <div class="timeline-content glass-card">
                         <h4>Vals</h4>
                         <p>7:00 P.M.</p>
                     </div>
                 </div>
-                <div class="timeline-item reveal slide-right">
+                <div class="timeline-item reveal slide-right delay-3">
                     <div class="timeline-icon"><i class="fa-solid fa-masks-theater"></i></div>
                     <div class="timeline-content glass-card">
                         <h4>Diversión</h4>
@@ -396,9 +406,9 @@
         </section>
 
         <!-- GALERÍA CARRUSEL DESLIZABLE -->
-        <section class="reveal fade-up">
-            <h2>Mis Momentos</h2>
-            <div class="carousel-wrapper">
+        <section>
+            <h2 class="reveal fade-up">Mis Momentos</h2>
+            <div class="carousel-wrapper reveal zoom-in delay-1">
                 <div class="carousel-container" id="galleryContainer">
                     <img src="assets/1.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 1">
                     <img src="assets/2.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 2">
@@ -414,34 +424,34 @@
         </section>
 
         <!-- CÓDIGO DE VESTIMENTA Y REGALOS -->
-        <section class="reveal slide-up">
-            <div class="glass-card" style="padding: 40px; margin-bottom: 30px;">
-                <i class="fa-solid fa-user-tie" style="font-size: 3rem; color: var(--dorado); margin-bottom: 15px;"></i>
-                <h3 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--dorado-oscuro);">Código de Vestimenta</h3>
+        <section>
+            <div class="glass-card reveal slide-left delay-1" style="padding: 40px; margin-bottom: 30px;">
+                <i class="fa-solid fa-user-tie" style="font-size: 3.5rem; color: var(--dorado-oscuro); margin-bottom: 15px;"></i>
+                <h3 style="font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--rosa-texto);">Código de Vestimenta</h3>
                 <p style="font-weight: 700; letter-spacing: 3px; margin-top: 15px; font-size: 1.2rem;">FORMAL</p>
-                <p style="margin-top: 15px; line-height: 1.6; color: var(--texto-claro);">
+                <p style="margin-top: 15px; line-height: 1.6; color: var(--texto-oscuro);">
                     Nos encantaría verte lucir espectacular. Te pedimos amablemente reservar cualquier tonalidad de <strong>color rosa</strong> exclusivamente para la quinceañera. ¡Gracias por tu comprensión!
                 </p>
             </div>
             
-            <div class="glass-card" style="padding: 40px;">
-                <i class="fa-solid fa-envelope-open-text" style="font-size: 3rem; color: var(--rosa-oscuro); margin-bottom: 15px;"></i>
-                <h3 style="font-family: var(--fuente-titulos); font-size: 2rem; color: var(--dorado-oscuro);">Mesa de Regalos</h3>
-                <p style="margin-top: 15px; line-height: 1.6; color: var(--texto-claro);">
+            <div class="glass-card reveal slide-right delay-2" style="padding: 40px;">
+                <i class="fa-solid fa-envelope-open-text" style="font-size: 3.5rem; color: var(--rosa-texto); margin-bottom: 15px;"></i>
+                <h3 style="font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--dorado-oscuro);">Mesa de Regalos</h3>
+                <p style="margin-top: 15px; line-height: 1.6; color: var(--texto-oscuro);">
                     Tu presencia es nuestro mayor regalo. Sin embargo, si deseas tener un detalle con Renata, contaremos con un buzón para <strong>lluvia de sobres</strong>, o bien, puedes traer un <strong>regalo físico</strong> el día del evento. ¡Agradecemos profundamente tu cariño!
                 </p>
             </div>
         </section>
 
         <!-- CONFIRMACIÓN DE ASISTENCIA -->
-        <section class="reveal zoom-in">
-            <div class="glass-card" style="padding: 50px 20px;">
-                <h2>¿Me acompañas?</h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem;">Confirma tu asistencia directamente por WhatsApp</p>
+        <section>
+            <div class="glass-card reveal zoom-in" style="padding: 50px 20px;">
+                <h2 style="margin-bottom: 10px;">¿Me acompañas?</h2>
+                <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--rosa-texto); font-weight: 600;">Confirma tu asistencia directamente por WhatsApp</p>
                 
-                <input type="text" id="guestName" placeholder="Tu nombre y apellido">
+                <input type="text" id="guestName" placeholder="Tu nombre y apellido" class="reveal fade-up delay-1">
                 
-                <select id="guestCount">
+                <select id="guestCount" class="reveal fade-up delay-2">
                     <option value="" disabled selected>Número de acompañantes</option>
                     <option value="1">1 Persona (Solo yo)</option>
                     <option value="2">2 Personas</option>
@@ -450,26 +460,26 @@
                     <option value="5">5 Personas</option>
                 </select>
 
-                <select id="attendance">
+                <select id="attendance" class="reveal fade-up delay-3">
                     <option value="Sí asistiré con mucho gusto">Sí asistiré</option>
                     <option value="Lamentablemente no podré asistir">No podré asistir</option>
                 </select>
 
-                <button class="btn btn-whatsapp" onclick="sendWhatsAppConfirmation()" style="margin-top: 10px; width: 100%; max-width: 350px;">
+                <button class="btn btn-whatsapp reveal flip-up delay-3" onclick="sendWhatsAppConfirmation()" style="margin-top: 10px; width: 100%; max-width: 350px;">
                     <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem; margin-right: 8px;"></i> Confirmar Asistencia
                 </button>
             </div>
         </section>
 
         <!-- MURO DE DESEOS VIA WHATSAPP -->
-        <section class="reveal slide-up" style="padding-bottom: 100px;">
-            <h2>Muro de Deseos</h2>
-            <div class="glass-card" style="padding: 40px 20px;">
-                <p style="margin-bottom: 25px; color: var(--texto-claro);">Envíale unas hermosas palabras a Renata en su día especial.</p>
+        <section style="padding-bottom: 100px;">
+            <h2 class="reveal slide-right">Muro de Deseos</h2>
+            <div class="glass-card reveal slide-up delay-1" style="padding: 40px 20px;">
+                <p style="margin-bottom: 25px; color: var(--texto-oscuro);">Envíale unas hermosas palabras a Renata en su día especial.</p>
                 <input type="text" id="wishName" placeholder="Tu nombre">
                 <textarea id="wishMessage" rows="4" placeholder="Escribe tu mensaje o buenos deseos para la festejada..."></textarea>
                 
-                <button class="btn" onclick="sendWhatsAppWish()" style="width: 100%; max-width: 350px;">
+                <button class="btn reveal zoom-in delay-2" onclick="sendWhatsAppWish()" style="width: 100%; max-width: 350px;">
                     <i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Enviar Mensaje
                 </button>
             </div>
@@ -484,10 +494,9 @@
     </div>
 
     <script>
-        // 1. Número de WhatsApp Global para la invitación
         const numeroWhatsApp = "527293119119";
 
-        // 2. Lógica del Sobre y Autoplay de Música
+        // Lógica del Sobre y Autoplay de Música
         const envelope = document.getElementById('envelope');
         envelope.addEventListener('click', () => {
             envelope.classList.add('open-envelope');
@@ -502,17 +511,15 @@
                         main.style.opacity = '1'; 
                         createParticles(); 
                         
-                        // Iniciar música y mostrar el botón
                         const music = document.getElementById('bgMusic');
                         const musicBtn = document.getElementById('musicToggleBtn');
-                        music.play().catch(e => console.log("El navegador bloqueó el auto-play de audio"));
+                        music.play().catch(e => console.log("Auto-play bloqueado"));
                         musicBtn.style.display = 'flex';
                     }, 50);
                 }, 1500);
             }, 1800);
         });
 
-        // 3. Control de Música
         function toggleMusic() {
             const music = document.getElementById('bgMusic');
             const icon = document.querySelector('#musicToggleBtn i');
@@ -528,7 +535,6 @@
             }
         }
 
-        // 4. Lightbox para la Galería
         function openLightbox(src) {
             document.getElementById('lightboxImg').src = src;
             document.getElementById('lightbox').style.display = 'flex';
@@ -537,14 +543,13 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // 5. Envío de Confirmación por WhatsApp
         function sendWhatsAppConfirmation() {
             const name = document.getElementById('guestName').value.trim();
             const count = document.getElementById('guestCount').value;
             const attend = document.getElementById('attendance').value;
 
             if(!name || !count) {
-                alert("Por favor, completa tu nombre y la cantidad de personas para confirmar.");
+                alert("Por favor, completa tu nombre y la cantidad de personas.");
                 return;
             }
 
@@ -553,13 +558,12 @@
             window.open(url, '_blank');
         }
 
-        // 6. Envío de Muro de Deseos por WhatsApp
         function sendWhatsAppWish() {
             const name = document.getElementById('wishName').value.trim();
             const message = document.getElementById('wishMessage').value.trim();
 
             if(!name || !message) {
-                alert("Por favor, escribe tu nombre y el mensaje que deseas enviarle a Renata.");
+                alert("Por favor, escribe tu nombre y tu mensaje.");
                 return;
             }
 
@@ -567,12 +571,11 @@
             const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
             
-            // Limpiar campos después de intentar enviar
             document.getElementById('wishName').value = "";
             document.getElementById('wishMessage').value = "";
         }
 
-        // 7. Cuenta Regresiva (17 de Octubre de 2026 a las 16:00 hrs)
+        // Cuenta Regresiva
         const targetDate = new Date("Oct 17, 2026 16:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -591,13 +594,8 @@
             }
         }, 1000);
 
-        // 8. Intersection Observer para Animaciones Fluidas
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
+        // Intersection Observer para Animaciones de entrada múltiples
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -606,7 +604,6 @@
             });
         }, observerOptions);
 
-        // Observar elementos cuando el contenido se muestra
         const observerInterval = setInterval(() => {
             const elements = document.querySelectorAll('.reveal');
             if(elements.length > 0 && document.getElementById('main-content').style.display === 'block') {
@@ -615,27 +612,26 @@
             }
         }, 500);
 
-        // 9. Creación de Partículas
+        // Creación de Partículas Rosas
         function createParticles() {
             const container = document.getElementById('particles-js');
             for (let i = 0; i < 35; i++) {
                 let p = document.createElement('div');
-                const size = Math.random() * 5 + 2;
+                const size = Math.random() * 6 + 2;
                 p.style.cssText = `
                     position:absolute; 
                     width:${size}px; height:${size}px; 
-                    background:rgba(212, 175, 55, 0.4); 
+                    background:rgba(240, 98, 146, 0.4); 
                     border-radius:50%; 
                     bottom:-20px; 
                     left:${Math.random()*100}vw; 
                     animation: floatUp ${Math.random()*7+5}s linear infinite;
-                    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+                    box-shadow: 0 0 10px rgba(240, 98, 146, 0.3);
                 `;
                 container.appendChild(p);
             }
         }
 
-        // Estilos para la animación de partículas
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes floatUp { 
