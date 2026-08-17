@@ -35,9 +35,13 @@
         body {
             font-family: var(--fuente-texto);
             color: var(--texto-oscuro);
-            /* FONDO FIJO CON CUERPO.JPG */
-            background: url('assets/cuerpo.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background-color: var(--palo-de-rosa-claro); /* Color de fondo por si la imagen tarda en cargar */
+            /* FONDO FIJO CON CUERPO.JPG (Sin agrandar, tamaño original, se repite si es necesario) */
+            background-image: url('assets/cuerpo.jpg');
+            background-repeat: repeat;
+            background-position: center top;
+            background-attachment: fixed;
+            background-size: auto; /* Mantiene su tamaño real sin estirarse */
             overflow-x: hidden;
         }
 
