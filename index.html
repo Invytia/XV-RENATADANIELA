@@ -174,7 +174,7 @@
 
         .btn { display: inline-block; padding: 16px 35px; background: linear-gradient(135deg, var(--palo-de-rosa), var(--palo-de-rosa-intenso)); color: white; text-decoration: none; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(181, 116, 122, 0.4); font-size: 1.8rem; letter-spacing: 1px;}
         .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(181, 116, 122, 0.6); }
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); font-family: sans-serif; font-size: 1.2rem; font-weight: bold;} /* Botón de WhatsApp se mantiene en sans-serif para legibilidad */
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); font-family: sans-serif; font-size: 1.2rem; font-weight: bold;} 
         .btn-whatsapp:hover { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
 
         .btn-small { display: inline-block; padding: 12px 25px; margin: 5px; background: rgba(255, 255, 255, 0.9); color: var(--palo-de-rosa-intenso); border: 1px solid var(--palo-de-rosa); border-radius: 50px; text-decoration: none; font-size: 1.5rem; cursor: pointer; transition: 0.3s;}
@@ -351,6 +351,8 @@
                     <img src="assets/nueva1.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 1">
                     <img src="assets/nueva2.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 2">
                     <img src="assets/nueva3.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 3">
+                    <img src="assets/nueva4.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 4">
+                    <img src="assets/nueva5.jpg" class="carousel-item" onclick="openLightbox(this.src)" alt="Foto 5">
                 </div>
                 <div class="swipe-indicator">
                     <i class="fa-solid fa-arrow-left-long"></i> Desliza para ver más <i class="fa-solid fa-arrow-right-long"></i>
@@ -365,7 +367,7 @@
                 <h3 style="font-family: var(--fuente-titulos); font-size: 3.5rem; color: var(--palo-de-rosa-intenso); font-weight: normal;">Código de Vestimenta</h3>
                 <p style="font-size: 2rem; margin-top: 10px;">Formal</p>
                 <p style="margin-top: 15px; font-size: 1.8rem; line-height: 1.4; color: var(--texto-oscuro);">
-                    Nos encantaría verte lucir espectacular. Te pedimos amablemente reservar cualquier tonalidad de <strong>color rosa</strong> exclusivamente para la quinceañera. ¡Gracias por tu comprensión!
+                    Nos encantaría verte lucir espectacular. Te pedimos amablemente reservar cualquier tonalidad de color rosa exclusivamente para la quinceañera. ¡Gracias por tu comprensión!
                 </p>
             </div>
             
@@ -373,7 +375,7 @@
                 <i class="fa-solid fa-envelope-open-text" style="font-size: 3.5rem; color: var(--palo-de-rosa-oscuro); margin-bottom: 15px;"></i>
                 <h3 style="font-family: var(--fuente-titulos); font-size: 3.5rem; color: var(--palo-de-rosa-intenso); font-weight: normal;">Mesa de Regalos</h3>
                 <p style="margin-top: 15px; font-size: 1.8rem; line-height: 1.4; color: var(--texto-oscuro);">
-                    Tu presencia es nuestro mayor regalo. Sin embargo, si deseas tener un detalle con Renata, contaremos con un buzón para <strong>lluvia de sobres</strong>, o bien, puedes traer un <strong>regalo físico</strong> el día del evento. ¡Agradecemos profundamente tu cariño!
+                    Tu presencia es nuestro mayor regalo. Sin embargo, si deseas tener un detalle con Renata, contaremos con un buzón para lluvia de sobres, o bien, puedes traer un regalo físico el día del evento. ¡Agradecemos profundamente tu cariño!
                 </p>
             </div>
         </section>
@@ -385,17 +387,8 @@
                 <p style="margin-bottom: 30px; font-size: 1.8rem; color: var(--texto-oscuro);">Confirma tu asistencia directamente por WhatsApp</p>
                 
                 <input type="text" id="guestName" placeholder="Tu nombre y apellido" class="reveal fade-up delay-1">
-                
-                <select id="guestCount" class="reveal fade-up delay-2">
-                    <option value="" disabled selected>Número de acompañantes</option>
-                    <option value="1">1 Persona (Solo yo)</option>
-                    <option value="2">2 Personas</option>
-                    <option value="3">3 Personas</option>
-                    <option value="4">4 Personas</option>
-                    <option value="5">5 Personas</option>
-                </select>
 
-                <select id="attendance" class="reveal fade-up delay-3">
+                <select id="attendance" class="reveal fade-up delay-2">
                     <option value="Sí asistiré con mucho gusto">Sí asistiré</option>
                     <option value="Lamentablemente no podré asistir">No podré asistir</option>
                 </select>
@@ -480,15 +473,14 @@
 
         function sendWhatsAppConfirmation() {
             const name = document.getElementById('guestName').value.trim();
-            const count = document.getElementById('guestCount').value;
             const attend = document.getElementById('attendance').value;
 
-            if(!name || !count) {
-                alert("Por favor, completa tu nombre y la cantidad de personas.");
+            if(!name) {
+                alert("Por favor, completa tu nombre para confirmar.");
                 return;
             }
 
-            const text = `¡Hola! Soy ${name}. ${attend} a los XV años de Renata. Seremos ${count} personas en total.`;
+            const text = `¡Hola! Soy ${name}. ${attend} a los XV años de Renata.`;
             const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         }
