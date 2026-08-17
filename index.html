@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV Años - Renata Daniela</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Se agregan fuentes Lora (Serif elegante) y Great Vibes (Manuscrita) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --blanco: #ffffff;
-            --blanco-transparente: rgba(255, 255, 255, 0.75);
-            --rosa-muy-claro: #fff0f5;
-            --rosa-pastel: #ffe4e1;
-            --rosa-medio: #ffb6c1;
-            --rosa-oscuro: #f06292;
-            --rosa-texto: #d8437d; /* Un rosa más intenso para resaltar textos */
+            
+            /* NUEVA PALETA: PALO DE ROSA */
+            --palo-de-rosa-transparente: rgba(246, 227, 230, 0.75); /* Tinte para el efecto Glass */
+            --palo-de-rosa-claro: #eecbcd;
+            --palo-de-rosa: #dca3a8;
+            --palo-de-rosa-oscuro: #b5747a;
+            --palo-de-rosa-intenso: #9a565d;
+            
             --dorado: #d4af37;
-            --dorado-oscuro: #b5952f;
+            --dorado-oscuro: #ad8f2d;
             --texto-oscuro: #4a3b3e;
-            --texto-claro: #7a6a6d;
-            --fuente-titulos: 'Playfair Display', serif;
-            --fuente-texto: 'Montserrat', sans-serif;
+            --texto-claro: #6b5558;
+            
+            /* TIPOGRAFÍAS LIMPIAS */
+            --fuente-texto: 'Lora', serif; /* Serif limpia y bonita */
+            --fuente-titulos: 'Great Vibes', cursive; /* Manuscrita para títulos */
             --fuente-nombres: 'Great Vibes', cursive;
         }
 
@@ -30,27 +35,22 @@
         body {
             font-family: var(--fuente-texto);
             color: var(--texto-oscuro);
-            background: linear-gradient(-45deg, var(--rosa-muy-claro), var(--rosa-pastel), #ffdde1, #ffffff);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            /* FONDO FIJO CON CUERPO.JPG */
+            background: url('assets/cuerpo.jpg') no-repeat center center fixed;
+            background-size: cover;
             overflow-x: hidden;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         #particles-js { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; }
 
+        /* EFECTO GLASS CON TONO PALO DE ROSA */
         .glass-card {
-            background: var(--blanco-transparente);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            background: var(--palo-de-rosa-transparente);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(240, 98, 146, 0.15); /* Sombra rosada */
+            box-shadow: 0 8px 32px 0 rgba(181, 116, 122, 0.2); /* Sombra palo de rosa */
         }
 
         /* --- SECCIÓN HERO AJUSTADA --- */
@@ -64,7 +64,7 @@
             align-items: flex-end; /* Mueve el contenido hacia abajo */
             justify-content: center;
             text-align: center;
-            padding-bottom: 8vh; /* Separación desde el fondo para que no estorbe */
+            padding-bottom: 8vh; 
         }
 
         /* --- SOBRE (BLANCO) --- */
@@ -87,34 +87,33 @@
         .envelope-wrapper { position: relative; width: 320px; height: 220px; cursor: pointer; animation: float 3s ease-in-out infinite; perspective: 1000px; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
         
-        /* Modificación a sobre blanco para alto contraste */
         .envelope-body { position: absolute; bottom: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #ffffff, #f2f2f2); border-radius: 10px; z-index: 2; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid #eaeaea; }
         .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, #ffffff, #f9f9f9); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 0.6s ease-in-out; z-index: 4; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.05)); }
         
-        .envelope-letter { position: absolute; bottom: 10px; left: 10px; width: 300px; height: 200px; background: var(--rosa-muy-claro); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; transition: transform 1s ease-in-out 0.6s; border: 1px solid var(--rosa-medio); padding: 20px;}
-        .envelope-letter h2 { font-family: var(--fuente-nombres); font-size: 2.5rem; color: var(--rosa-texto); text-align: center; line-height: 1; margin: 0;}
+        .envelope-letter { position: absolute; bottom: 10px; left: 10px; width: 300px; height: 200px; background: var(--blanco); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; transition: transform 1s ease-in-out 0.6s; border: 1px solid var(--palo-de-rosa-claro); padding: 20px;}
+        .envelope-letter h2 { font-family: var(--fuente-nombres); font-size: 2.8rem; color: var(--palo-de-rosa-oscuro); text-align: center; line-height: 1; margin: 0;}
         
-        /* Modificación para el sello 100% transparente sin cortes */
+        /* SELLO TRANSPARENTE */
         .wax-seal { 
             position: absolute; 
             top: 85px; 
             left: 50%; 
             transform: translateX(-50%); 
-            width: 75px; /* Ajusta este tamaño si el PNG es muy grande o pequeño */
+            width: 75px; 
             height: 75px; 
-            background: transparent; /* Sin fondo */
-            border-radius: 0; /* Sin cortes circulares forzados */
+            background: transparent; 
+            border-radius: 0; 
             z-index: 5; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            box-shadow: none; /* Sin sombras artificiales */
+            box-shadow: none; 
             overflow: visible;
         }
         .wax-seal img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Evita recortes de la imagen */
+            object-fit: contain; 
             background: transparent;
         }
         
@@ -125,8 +124,9 @@
         /* --- CONTENIDO PRINCIPAL --- */
         #main-content { display: none; opacity: 0; transition: opacity 2s ease-in; position: relative; z-index: 10; }
         section { padding: 80px 20px; text-align: center; max-width: 1000px; margin: 0 auto; overflow: hidden; }
-        h1 { font-family: var(--fuente-nombres); font-size: 4.8rem; color: var(--texto-oscuro); text-shadow: 2px 2px 4px rgba(255,255,255,0.8); line-height: 1.1; }
-        h2 { font-family: var(--fuente-titulos); font-size: 2.8rem; margin-bottom: 30px; font-style: italic; color: var(--rosa-texto); }
+        
+        h1 { font-family: var(--fuente-nombres); font-size: 5.2rem; color: var(--palo-de-rosa-intenso); text-shadow: 2px 2px 4px rgba(255,255,255,0.9); line-height: 1.1; font-weight: normal; }
+        h2 { font-family: var(--fuente-titulos); font-size: 3.8rem; margin-bottom: 25px; font-weight: normal; color: var(--palo-de-rosa-oscuro); text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
         
         /* --- ANIMACIONES DE ENTRADA MULTIPLES (REVEAL) --- */
         .reveal { opacity: 0; transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
@@ -136,7 +136,6 @@
         .reveal.slide-right { transform: translateX(-60px); }
         .reveal.flip-up { transform: perspective(400px) rotateX(90deg); }
         
-        /* Tiempos de retraso para animaciones escalonadas */
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.3s; }
         .delay-3 { transition-delay: 0.5s; }
@@ -150,7 +149,7 @@
             align-items: center;
             max-width: 500px; 
             margin: 20px auto; 
-            flex-wrap: nowrap; /* Fuerza un solo renglón */
+            flex-wrap: nowrap; 
         }
         .time-box { 
             padding: 5px; 
@@ -162,9 +161,10 @@
         }
         .time-box span { 
             display: block; 
-            font-family: var(--fuente-titulos); 
+            font-family: var(--fuente-texto); /* Serif para números también */
             font-size: 2.8rem; 
-            color: var(--dorado-oscuro); 
+            font-weight: 500;
+            color: var(--palo-de-rosa-intenso); 
             line-height: 1; 
             margin-bottom: 5px;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
@@ -174,9 +174,9 @@
             font-weight: 600; 
             text-transform: uppercase; 
             letter-spacing: 2px;
-            color: var(--rosa-texto);
+            color: var(--palo-de-rosa-oscuro);
         }
-        .timer-sep { font-size: 2rem; color: var(--rosa-medio); font-family: var(--fuente-titulos); padding-bottom: 20px;}
+        .timer-sep { font-size: 2rem; color: var(--palo-de-rosa); padding-bottom: 20px;}
 
         /* --- CARRETEL (GALERÍA DESLIZABLE HORIZONTAL) --- */
         .carousel-wrapper { position: relative; width: 100%; padding: 20px 0; }
@@ -188,12 +188,12 @@
         .carousel-item {
             flex: 0 0 auto; width: 260px; height: 380px; scroll-snap-align: center;
             object-fit: cover; border-radius: 15px; cursor: pointer;
-            border: 4px solid var(--blanco); box-shadow: 0 8px 20px rgba(240, 98, 146, 0.25);
+            border: 4px solid var(--blanco); box-shadow: 0 8px 20px rgba(181, 116, 122, 0.25);
             transition: transform 0.3s;
         }
         .carousel-item:active { transform: scale(0.95); }
         .swipe-indicator {
-            font-size: 0.9rem; color: var(--texto-claro); margin-top: 10px;
+            font-size: 0.95rem; font-style: italic; color: var(--palo-de-rosa-oscuro); margin-top: 10px;
             display: flex; align-items: center; justify-content: center; gap: 10px; animation: pulse 2s infinite;
         }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
@@ -204,63 +204,64 @@
             background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 10000;
             backdrop-filter: blur(5px);
         }
-        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 30px rgba(240, 98, 146, 0.3); }
+        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 30px rgba(181, 116, 122, 0.3); }
         #lightbox .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; transition: 0.3s; }
-        #lightbox .close-btn:hover { color: var(--rosa-oscuro); }
+        #lightbox .close-btn:hover { color: var(--palo-de-rosa-oscuro); }
 
         /* --- UBICACIONES --- */
-        .ubicacion-limpia { margin: 40px 0; padding: 20px 0; border-bottom: 1px solid rgba(240, 98, 146, 0.3); }
+        .ubicacion-limpia { margin: 40px 0; padding: 20px 0; border-bottom: 1px solid rgba(181, 116, 122, 0.3); }
         .ubicacion-limpia:last-child { border-bottom: none; }
-        .ubicacion-limpia i { font-size: 2.5rem; color: var(--rosa-texto); margin: 0 10px 15px 10px; }
+        .ubicacion-limpia i { font-size: 2.5rem; color: var(--palo-de-rosa-oscuro); margin: 0 10px 15px 10px; }
         .map-iframe { width: 100%; max-width: 600px; height: 350px; border-radius: 15px; margin: 20px auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* --- FORMULARIOS --- */
         input, select, textarea {
             width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px;
-            border: 1px solid var(--rosa-medio); background: rgba(255,255,255,0.9);
-            font-family: var(--fuente-texto); color: var(--texto-oscuro); outline: none; transition: 0.3s;
+            border: 1px solid var(--palo-de-rosa-claro); background: rgba(255,255,255,0.9);
+            font-family: var(--fuente-texto); color: var(--texto-oscuro); outline: none; transition: 0.3s; font-size: 1rem;
         }
-        input:focus, select:focus, textarea:focus { border-color: var(--rosa-oscuro); box-shadow: 0 0 8px rgba(240, 98, 146, 0.3); }
+        input:focus, select:focus, textarea:focus { border-color: var(--palo-de-rosa-oscuro); box-shadow: 0 0 8px rgba(181, 116, 122, 0.3); }
 
         .btn {
             display: inline-block; padding: 16px 35px;
-            background: linear-gradient(135deg, var(--rosa-oscuro), var(--rosa-texto));
-            color: white; text-decoration: none; border-radius: 50px; font-weight: 600;
-            border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(240, 98, 146, 0.4);
-            font-size: 1rem;
+            background: linear-gradient(135deg, var(--palo-de-rosa), var(--palo-de-rosa-intenso));
+            color: white; text-decoration: none; border-radius: 50px; font-weight: 500;
+            border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(181, 116, 122, 0.4);
+            font-size: 1.05rem; letter-spacing: 1px;
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(240, 98, 146, 0.6); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(181, 116, 122, 0.6); }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
         .btn-whatsapp:hover { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
 
         .btn-small {
             display: inline-block; padding: 12px 25px; margin: 5px;
-            background: rgba(255, 255, 255, 0.9); color: var(--rosa-texto);
-            border: 1px solid var(--rosa-medio); border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+            background: rgba(255, 255, 255, 0.9); color: var(--palo-de-rosa-intenso);
+            border: 1px solid var(--palo-de-rosa); border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.3s;
         }
-        .btn-small:hover { background: var(--rosa-texto); color: white; border-color: var(--rosa-texto); }
+        .btn-small:hover { background: var(--palo-de-rosa-intenso); color: white; border-color: var(--palo-de-rosa-intenso); }
 
         /* --- BOTÓN DE MÚSICA STICKY --- */
         .music-btn {
             position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); border: 2px solid var(--rosa-texto);
-            color: var(--rosa-texto); font-size: 1.2rem; cursor: pointer; z-index: 10001;
-            display: none; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3); transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); border: 2px solid var(--palo-de-rosa-oscuro);
+            color: var(--palo-de-rosa-oscuro); font-size: 1.2rem; cursor: pointer; z-index: 10001;
+            display: none; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(181, 116, 122, 0.3); transition: all 0.3s ease;
         }
-        .music-btn:hover { transform: scale(1.1); background: var(--rosa-pastel); }
+        .music-btn:hover { transform: scale(1.1); background: var(--palo-de-rosa-claro); }
 
         /* --- ITINERARIO --- */
         .timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
-        .timeline::before { content: ''; position: absolute; left: 50%; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, var(--rosa-medio), transparent); }
+        .timeline::before { content: ''; position: absolute; left: 50%; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, var(--palo-de-rosa), transparent); }
         .timeline-item { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; width: 100%; }
         .timeline-item:nth-child(even) { flex-direction: row-reverse; }
         .timeline-content { width: 45%; padding: 20px; text-align: center; }
-        .timeline-content h4 { font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--dorado-oscuro); margin-bottom: 5px; }
-        .timeline-content p { font-weight: 600; font-size: 1.1rem; color: var(--rosa-texto); }
-        .timeline-icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: white; border: 2px solid var(--rosa-medio); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; color: var(--dorado-oscuro); font-size: 1.2rem; box-shadow: 0 0 10px rgba(240, 98, 146, 0.3); }
+        .timeline-content h4 { font-family: var(--fuente-titulos); font-size: 1.8rem; color: var(--palo-de-rosa-intenso); margin-bottom: 5px; font-weight: normal; }
+        .timeline-content p { font-weight: 500; font-size: 1.1rem; color: var(--texto-oscuro); }
+        .timeline-icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: white; border: 2px solid var(--palo-de-rosa); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; color: var(--palo-de-rosa-oscuro); font-size: 1.2rem; box-shadow: 0 0 10px rgba(181, 116, 122, 0.3); }
 
         @media (max-width: 768px) {
-            h1 { font-size: 4rem; }
+            h1 { font-size: 4.2rem; }
+            h2 { font-size: 3.2rem; }
             .timeline::before { left: 30px; }
             .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; align-items: flex-end; }
             .timeline-content { width: 80%; margin-left: auto; text-align: left; }
@@ -285,31 +286,29 @@
     <div id="envelope-screen">
         <div class="envelope-wrapper" id="envelope">
             <div class="envelope-letter">
-                <p style="font-size: 0.9rem; color: var(--texto-claro); letter-spacing: 2px; margin-bottom: 5px;">MIS XV AÑOS</p>
+                <p style="font-size: 0.9rem; color: var(--texto-claro); letter-spacing: 2px; margin-bottom: 5px; text-align: center;">MIS XV AÑOS</p>
                 <h2>Renata Daniela</h2>
             </div>
             <div class="envelope-flap"></div>
             <div class="envelope-body"></div>
             
-            <!-- Sello con la imagen ajustada SIN FONDO -->
             <div class="wax-seal">
                 <img src="assets/sello.png" alt="Sello">
             </div>
         </div>
-        <div style="margin-top: 50px; letter-spacing: 4px; text-transform: uppercase; font-size: 0.85rem; color: var(--texto-oscuro); font-weight: 500; animation: pulse 2s infinite; background: rgba(255,255,255,0.85); padding: 8px 20px; border-radius: 20px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Toca para abrir</div>
+        <div style="margin-top: 50px; letter-spacing: 4px; text-transform: uppercase; font-size: 0.85rem; color: var(--texto-oscuro); font-weight: 600; animation: pulse 2s infinite; background: rgba(255,255,255,0.85); padding: 8px 20px; border-radius: 20px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Toca para abrir</div>
     </div>
 
-    <!-- PARTÍCULAS -->
     <div id="particles-js"></div>
 
     <div id="main-content">
         
         <!-- HERO -->
         <section class="hero-container reveal fade-up" style="padding:0; padding-bottom: 8vh;">
-            <div class="glass-card reveal flip-up delay-1" style="padding: 30px 20px; width: 90%; max-width: 650px;">
-                <div style="letter-spacing: 6px; color: var(--dorado-oscuro); margin-bottom: 10px; font-weight: 600; font-size: 0.85rem;">MIS XV AÑOS</div>
+            <div class="glass-card reveal flip-up delay-1" style="padding: 35px 25px; width: 90%; max-width: 650px;">
+                <div style="letter-spacing: 6px; color: var(--palo-de-rosa-oscuro); margin-bottom: 10px; font-weight: 600; font-size: 0.85rem;">MIS XV AÑOS</div>
                 <h1>Renata Daniela</h1>
-                <p style="font-weight: 600; margin-top: 15px; letter-spacing: 3px; font-size: 1.1rem; color: var(--texto-oscuro);">17 DE OCTUBRE DE 2026</p>
+                <p style="font-weight: 500; margin-top: 15px; letter-spacing: 3px; font-size: 1.1rem; color: var(--texto-oscuro);">17 DE OCTUBRE DE 2026</p>
             </div>
         </section>
 
@@ -325,21 +324,23 @@
                 <div class="timer-sep">:</div>
                 <div class="time-box"><span id="seconds">00</span><p>Seg</p></div>
             </div>
-            <p class="reveal fade-up delay-2" style="margin-top: 40px; font-style: italic; font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-claro); line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
-                "Gracias Dios por permitirme llegar a este día tan especial en mi vida con personas como mis familiares y amigos."
-            </p>
+            <div class="glass-card reveal fade-up delay-2" style="margin-top: 40px; padding: 30px;">
+                <p style="font-style: italic; font-size: 1.4rem; color: var(--texto-oscuro); line-height: 1.6;">
+                    "Gracias Dios por permitirme llegar a este día tan especial en mi vida con personas como mis familiares y amigos."
+                </p>
+            </div>
         </section>
 
         <!-- PADRES Y PADRINOS -->
         <section>
             <h2 class="reveal slide-right">Con la bendición de</h2>
             <div class="glass-card reveal fade-up delay-1" style="padding: 35px; margin-bottom: 25px;">
-                <p style="color: var(--rosa-texto); letter-spacing: 3px; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;">MIS PADRES</p>
-                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-oscuro);">Miguel Emilio Vázquez Vázquez<br><span style="font-size: 1.2rem; color: var(--dorado-oscuro);">&</span><br>Martha Roberta Hernández Vázquez</p>
+                <p style="color: var(--palo-de-rosa-intenso); letter-spacing: 3px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px;">MIS PADRES</p>
+                <p style="font-size: 1.4rem; color: var(--texto-oscuro);">Miguel Emilio Vázquez Vázquez<br><span style="font-size: 1.2rem; color: var(--palo-de-rosa); margin: 10px 0; display: inline-block;">&</span><br>Martha Roberta Hernández Vázquez</p>
             </div>
             <div class="glass-card reveal fade-up delay-2" style="padding: 35px;">
-                <p style="color: var(--rosa-texto); letter-spacing: 3px; font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;">MIS PADRINOS</p>
-                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-oscuro);">Nilton Gerardo Hernández Vázquez<br><span style="font-size: 1.2rem; color: var(--dorado-oscuro);">&</span><br>Carmen Palma Jaimes</p>
+                <p style="color: var(--palo-de-rosa-intenso); letter-spacing: 3px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px;">MIS PADRINOS</p>
+                <p style="font-size: 1.4rem; color: var(--texto-oscuro);">Nilton Gerardo Hernández Vázquez<br><span style="font-size: 1.2rem; color: var(--palo-de-rosa); margin: 10px 0; display: inline-block;">&</span><br>Carmen Palma Jaimes</p>
             </div>
         </section>
 
@@ -347,11 +348,11 @@
         <section>
             <h2 class="reveal zoom-in">Dónde Celebraremos</h2>
             
-            <div class="ubicacion-limpia reveal slide-up delay-1">
+            <div class="glass-card ubicacion-limpia reveal slide-up delay-1" style="border-bottom: none; padding: 40px 20px;">
                 <i class="fa-solid fa-church"></i>
                 <i class="fa-solid fa-champagne-glasses" style="margin-left: -5px;"></i>
-                <h3 style="font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--dorado-oscuro); margin-bottom: 15px;">Ceremonia y Recepción</h3>
-                <p style="font-weight: 600; color: var(--rosa-texto); font-size: 1.3rem;">Ex hacienda del Carmen</p>
+                <h3 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--palo-de-rosa-intenso); margin-bottom: 15px; font-weight: normal;">Ceremonia y Recepción</h3>
+                <p style="font-weight: 600; color: var(--texto-oscuro); font-size: 1.3rem;">Ex hacienda del Carmen</p>
                 
                 <div class="map-iframe reveal fade-up delay-2">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7531.581252951008!2d-99.5939441!3d19.2914692!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd8a60b001691f%3A0x3da157d4779a7cac!2sEx%20Hacienda%20Del%20Carmen!5e0!3m2!1ses!2smx!4v1786739864274!5m2!1ses!2smx" width="100%" height="100%" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -426,17 +427,17 @@
         <!-- CÓDIGO DE VESTIMENTA Y REGALOS -->
         <section>
             <div class="glass-card reveal slide-left delay-1" style="padding: 40px; margin-bottom: 30px;">
-                <i class="fa-solid fa-user-tie" style="font-size: 3.5rem; color: var(--dorado-oscuro); margin-bottom: 15px;"></i>
-                <h3 style="font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--rosa-texto);">Código de Vestimenta</h3>
-                <p style="font-weight: 700; letter-spacing: 3px; margin-top: 15px; font-size: 1.2rem;">FORMAL</p>
+                <i class="fa-solid fa-user-tie" style="font-size: 3.5rem; color: var(--palo-de-rosa-oscuro); margin-bottom: 15px;"></i>
+                <h3 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--palo-de-rosa-intenso); font-weight: normal;">Código de Vestimenta</h3>
+                <p style="font-weight: 600; letter-spacing: 3px; margin-top: 15px; font-size: 1.2rem;">FORMAL</p>
                 <p style="margin-top: 15px; line-height: 1.6; color: var(--texto-oscuro);">
                     Nos encantaría verte lucir espectacular. Te pedimos amablemente reservar cualquier tonalidad de <strong>color rosa</strong> exclusivamente para la quinceañera. ¡Gracias por tu comprensión!
                 </p>
             </div>
             
             <div class="glass-card reveal slide-right delay-2" style="padding: 40px;">
-                <i class="fa-solid fa-envelope-open-text" style="font-size: 3.5rem; color: var(--rosa-texto); margin-bottom: 15px;"></i>
-                <h3 style="font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--dorado-oscuro);">Mesa de Regalos</h3>
+                <i class="fa-solid fa-envelope-open-text" style="font-size: 3.5rem; color: var(--palo-de-rosa-oscuro); margin-bottom: 15px;"></i>
+                <h3 style="font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--palo-de-rosa-intenso); font-weight: normal;">Mesa de Regalos</h3>
                 <p style="margin-top: 15px; line-height: 1.6; color: var(--texto-oscuro);">
                     Tu presencia es nuestro mayor regalo. Sin embargo, si deseas tener un detalle con Renata, contaremos con un buzón para <strong>lluvia de sobres</strong>, o bien, puedes traer un <strong>regalo físico</strong> el día del evento. ¡Agradecemos profundamente tu cariño!
                 </p>
@@ -447,7 +448,7 @@
         <section>
             <div class="glass-card reveal zoom-in" style="padding: 50px 20px;">
                 <h2 style="margin-bottom: 10px;">¿Me acompañas?</h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--rosa-texto); font-weight: 600;">Confirma tu asistencia directamente por WhatsApp</p>
+                <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--texto-oscuro); font-weight: 500;">Confirma tu asistencia directamente por WhatsApp</p>
                 
                 <input type="text" id="guestName" placeholder="Tu nombre y apellido" class="reveal fade-up delay-1">
                 
@@ -475,7 +476,7 @@
         <section style="padding-bottom: 100px;">
             <h2 class="reveal slide-right">Muro de Deseos</h2>
             <div class="glass-card reveal slide-up delay-1" style="padding: 40px 20px;">
-                <p style="margin-bottom: 25px; color: var(--texto-oscuro);">Envíale unas hermosas palabras a Renata en su día especial.</p>
+                <p style="margin-bottom: 25px; color: var(--texto-oscuro); font-size: 1.1rem;">Envíale unas hermosas palabras a Renata en su día especial.</p>
                 <input type="text" id="wishName" placeholder="Tu nombre">
                 <textarea id="wishMessage" rows="4" placeholder="Escribe tu mensaje o buenos deseos para la festejada..."></textarea>
                 
@@ -612,21 +613,21 @@
             }
         }, 500);
 
-        // Creación de Partículas Rosas
+        // Creación de Partículas Palo de Rosa
         function createParticles() {
             const container = document.getElementById('particles-js');
             for (let i = 0; i < 35; i++) {
                 let p = document.createElement('div');
-                const size = Math.random() * 6 + 2;
+                const size = Math.random() * 6 + 3;
                 p.style.cssText = `
                     position:absolute; 
                     width:${size}px; height:${size}px; 
-                    background:rgba(240, 98, 146, 0.4); 
+                    background:rgba(220, 163, 168, 0.45); 
                     border-radius:50%; 
                     bottom:-20px; 
                     left:${Math.random()*100}vw; 
                     animation: floatUp ${Math.random()*7+5}s linear infinite;
-                    box-shadow: 0 0 10px rgba(240, 98, 146, 0.3);
+                    box-shadow: 0 0 10px rgba(181, 116, 122, 0.3);
                 `;
                 container.appendChild(p);
             }
